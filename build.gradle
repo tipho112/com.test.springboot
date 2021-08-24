@@ -1,0 +1,25 @@
+plugins {
+    id 'org.springframwork.boot' version '2.4.1'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+
+group 'com.test.springboot'
+version '1.0.4-SNAPSHOT-' + new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-strarter-web')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+
+    testImplementation ('org.springframework.boot:spring-boot-starter-test')
+}
+
+test {
+    useJUnitPlatform()
+}
