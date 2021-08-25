@@ -1,0 +1,82 @@
+1-13. 데이터 등록/수정/삭제 API
+
+    Service, Controller, RequestDto
+
+    개발 순서
+        Service -> Controller -> DTO 순으로 만드는 것이 일반적이다.
+
+        Service : DTO 객체를 받아서 저장하는 일
+        Controller : Service한테 save()를 요청
+        DTO -> Controller -> Service
+
+        실제 개발 순서
+        DTO -> Service -> Controller 순서대로 작업하면 될 거다.
+
+1-9. JPA (Java Persistence API : 자바 지속성 API)
+
+    cf. MyBatis , SQL Mapper -SQL 쿼리 작업 증가하는 문제 발생
+    객체지향 프로그래밍만하면, SQL은 자동으로 연동할 수 있는 방법은 없을까?
+
+    객체 매핑 ---> SQL 매퍼는 쿼리를 자동으로 매핑
+    JPA를 쓴다? Collection에서 데이터를 넣고, 빼는 일을 자유롭게.
+
+    CRUD(Create, Read, Update, Delete)
+        저장: jpa.pesist(obj)
+        조회: Member member = jpa.find(memberId);
+        수정: member.setName("홍길동");
+                    name
+             member.setAge(12);
+                    age
+        삭제: jpa.remove(member);
+
+    JPA사용하면
+        장점 ; 수정이 매우 편하다. SQL작업을 별도로 하지 않아도 된다.
+            객체의 내용을 변경, 알아서 DB를 update Query가 수행되서
+            객체와 DB를 완전 일치시킬 수 있다.
+        유지/보수:
+            기존 : 필드가 변경 -> 모든 SQL 수정
+            JPA : 필드가 새로 추가 -> SQL은 JPA 알아서 처리
+            class User {
+                private String name;
+                private int age;
+                private String address;
+            }
+
+            create table Users (
+                name    char(20),
+                age     int(3),
+                address char(100)
+            )
+
+        게시판을 간단하게 만들면서 테스트
+        제목, 작성자, 내용만 있는 간단한 게시판
+        글쓴날짜, 수정한 날짜,
+
+        build.gradle에다가 JPA를 사용하겠다고 모듈 설정
+
+3. Git 이메일과 사용자 강제로 등록
+
+    Commad 창에 명령
+    git config --global user.email "user@test.com"
+    git config --global user.name  "Your Name"
+
+2. 검색도움말 단축키 : CTRL+SHIFT+A
+
+    share
+
+        Share Project on GitHub
+1. build.gradle 을 변경한다.
+
+0. 환경설정
+
+0-1. gradle version 6.7.1
+     압축을 풀고 폴더명을 gradle로 변경
+     d:\gradle로 폴더를 이동
+     환경변수에 d:\grale\bin 추가
+0-2. 자바 1.8tjfcl
+0-3. toolbox 설치
+     IntelliJ Community version 설치
+     메모리는 시스템 메모리의 약 1/4
+0-4. 프로젝트 생성
+     gradle, java 버전 확인
+     프로젝트명 ( com.test.springboot 기준으로 강의 내용 설명함)
