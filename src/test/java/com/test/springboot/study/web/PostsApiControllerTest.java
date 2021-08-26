@@ -7,6 +7,7 @@ package com.test.springboot.study.web;
 import com.test.springboot.study.domain.posts.Posts;
 import com.test.springboot.study.domain.posts.PostsRepository;
 import com.test.springboot.study.web.dto.PostsSaveRequestDto;
+import com.test.springboot.study.web.dto.PostsUpdateRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -83,6 +86,51 @@ public class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
+    }
+
+    /*
+        2-9 단위 테스트에 update기능 추가
+     */
+
+    @Test
+    public void postsCheckUpdate() throws Exception {
+        Posts savedPosts = postsRepository.save(Posts.
+                builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+        Long updateId = savedPosts.getId();
+        String expectedTitle = "title";
+        String expectedContent = "content";
+
+        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto
+                .builder()
+                .title(expectedTitle)
+                .content(expectedContent)
+                .build();
+        // http://localhost:8080/api/v1/posts/아이디
+        // Update : PUT Method
+        //          수신 : PutMapping
+        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        /*
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(
+                                                            url,
+                                                            HttpMethod.PUT,
+                                                            requestEntity,
+                                                            Long.class);
+        */
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
+
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        List<Posts> all = postsRepository.findAll();
+        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
+        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
+
     }
 
 }

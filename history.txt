@@ -1,3 +1,13 @@
+3-1 IndexController.java
+    study.web.IndexController.java
+
+2-11. JPA Auditing
+
+    JPA 감시, 글 생성(Create), 글 변경것을 감시한다.
+
+    domain/BaseTimeEntity 클래스를 만들어서, JPA 실시간 감시
+
+
 1-13. 데이터 등록/수정/삭제 API
 
     Service, Controller, RequestDto

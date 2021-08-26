@@ -11,15 +11,22 @@ package com.test.springboot.study.domain.posts;
     @GeneratedValue : 키 생성
  */
 
+import com.test.springboot.study.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+/*
+2-11 JPA Auditing
+Posts가 BaseTimeEntity 추상클래스를 상속만 받으면 시간관리된다..
+ */
+
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private Long id;  // 글번호
@@ -35,5 +42,19 @@ public class Posts {
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    /*
+    2-7. Posts에 update() 기능을 추가
+    이제 서비스에서도 update가 추가한다.
+    Repository에 업데이트를 할 수 있는 코드 확인을 해야한다.
+    해야하는 절차.
+    update id O <------------------> save id X
+    update 수행하기 전에 id를 가지고 원본데이터를 찾는 일이 수행해야 함.
+     */
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 }
