@@ -1,0 +1,52 @@
+{{>layout/header}}
+
+<div class="row rowLine">
+    <div class="col">
+        <h4 class="text-primary">글수정</h4>
+    </div>
+</div>
+
+<!--
+    3-7
+    update 하는 화면을 다 만들었고,
+    하단 버튼의 이름이 btn-update, btn-delete
+    index.js로 가서 버튼의 동작을 등록
+-->
+
+<form>
+    <div class="row rowLine">
+        <div class="col-3 col-md-2">ID</div>
+        <div class="col-9 col-md-10">
+            <input type="text" value="{{posts.id}}" name="id" readonly id="id" placeholder="ID" required class="form-control">
+        </div>
+    </div>
+    <div class="row rowLine">
+        <div class="col-3 col-md-2">제목</div>
+        <div class="col-9 col-md-10">
+            <input type="text" value="{{posts.title}}" name="title" id="title" placeholder="제목" required class="form-control">
+        </div>
+    </div>
+    <div class="row rowLine">
+        <div class="col-3 col-md-2">작성자</div>
+        <div class="col-9 col-md-10">
+            <input type="text" value="{{posts.author}}" name="author" id="author" placeholder="작성자" required class="form-control">
+        </div>
+    </div>
+    <div class="row rowLine">
+        <div class="col-3 col-md-2">내용</div>
+        <div class="col-9 col-md-10">
+            <textarea name="content" id="content" placeholder="내용" rows="15" required class="form-control">{{posts.content}}</textarea>
+        </div>
+    </div>
+    <div class="row rowLine">
+        <div class="col text-center">
+            <button type="button" class="btn btn-primary" id="btn-update">변경완료</button>
+            <button type="button" class="btn btn-primary" id="btn-delete">삭제</button>
+            <button type="button" class="btn btn-primary" onClick="location.href='/'">목록</button>
+        </div>
+    </div>
+
+</form>
+
+
+{{>layout/footer}}

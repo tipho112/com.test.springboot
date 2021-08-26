@@ -1,0 +1,50 @@
+{{>layout/header}}
+<div class="row rowLine">
+    <div class="col">bootstrap test</div>
+</div>
+<div class="row rowLine">
+    <div class="col">
+        <button class="btn btn-primary" onClick="location.href='/posts/save'"><span class="material-icons">mode_edit</span> 글쓰기</button>
+    </div>
+</div>
+
+<!--
+    3-5 글 목록보기
+    글쓰기가 성공한 후, 첫화면으로 돌아오니까,
+    화면 하단에 현재까지 등록된 글의 목록을 보여주는 부분을 작성해야 한다.
+    번호     제목                            작성자        수정일
+    1       test                            tester      2021-08-26
+    2       test2                           admin       2021-08-26
+    #posts : Collection List를 for(), while()처럼 출력해준다.
+    정확히는 posts라는 List 순회한다는 것을 의미한다.
+    아직은 posts를 만들지 않았다.(목록에 보여주지는 현재 못한다.)
+    title에 링크를 매달 예정
+    /posts/update/아이디
+    PostsRepository에서 posts객체를 만들어서 List로 반환하는 작업해줘야 한다.
+-->
+
+<div class="row rowLine">
+    <div class="col-1">번호</div>
+    <div class="col-6">제목</div>
+    <div class="col-2">작성자</div>
+    <div class="col-3">수정일</div>
+</div>
+
+<!--
+    3-7
+    title을 클릭했을 원본글을 가지고와서 내용을 보여주는 작업을 해야한다.
+    그런데 시간관계상, 바로 글 수정으로 가보겠습니다.
+    수정, 내용보기랑 같다. 원본 데이터를 가져와서 화면에 뿌려주는 일을 하기 때문이다.
+    원본글을 가져오기 위해서는 id가 있어야 한다.
+-->
+
+{{#posts}}
+    <div class="row rowLine">
+        <div class="col-1">{{id}}</div>
+        <div class="col-6"><a href="/posts/update/{{id}}">{{title}}</a></div>
+        <div class="col-2">{{author}}</div>
+        <div class="col-3">{{modifiedDate}}</div>
+    </div>
+{{/posts}}
+
+{{>layout/footer}}
